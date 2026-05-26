@@ -57,6 +57,19 @@
         <input type="file" class="form-control" name="image" accept="image/*">
     </div>
 
+    <div class="form-group">
+    <label>Kategori</label>
+    <select class="form-control" name="kategori_ids[]" multiple>
+        @foreach($kategoris as $kat)
+        <option value="{{ $kat->id }}"
+            @if(!empty($item->kategoris) && $item->kategoris->contains($kat->id)) selected @endif>
+            {{ $kat->nama }}
+        </option>
+        @endforeach
+    </select>
+    <small class="text-muted">Tahan Ctrl untuk memilih lebih dari satu kategori.</small>
+</div>
+
     <button class="btn btn-primary mt-3">Submit</button>
 
 </form>
