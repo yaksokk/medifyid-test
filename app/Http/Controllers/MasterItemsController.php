@@ -59,7 +59,6 @@ class MasterItemsController extends Controller
             $kode = MasterItem::count('id');
             $kode = $kode + 1;
             $kode = str_pad($kode, 5, '0', STR_PAD_LEFT);
-            sleep(3);
         } else {
             $data_item = MasterItem::find($id);
             $kode = $data_item->kode;
