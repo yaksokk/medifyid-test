@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterItem;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MasterItemsController extends Controller
 {
@@ -69,6 +71,16 @@ class MasterItemsController extends Controller
         $data_item->kode = $kode;
         $data_item->supplier = $request->supplier;
         $data_item->jenis = $request->jenis;
+        $data_item->save();
+
+        if ($request-> hasFIle('image')) {
+            if($data_item->image && Storage::disk('public')->exists($data_item->image)) {
+                Storage::disk('public')->delete($data_item->image);
+            }
+            $path = $request->file('image')->store('items', 'public');
+            $data_item->image = $path;
+            }
+
         $data_item->save();
 
         return redirect('master-items');
