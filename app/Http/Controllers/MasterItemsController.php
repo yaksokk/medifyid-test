@@ -56,8 +56,7 @@ class MasterItemsController extends Controller
     {
         if ($method == 'new') {
             $data_item = new MasterItem;
-            $kode = MasterItem::count('id');
-            $kode = $kode + 1;
+            $kode = MasterItem::max('id') + 1;
             $kode = str_pad($kode, 5, '0', STR_PAD_LEFT);
         } else {
             $data_item = MasterItem::find($id);
